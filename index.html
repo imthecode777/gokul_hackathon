@@ -1,52 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Generation Form</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Crafters</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+
+    <!-- Primary Meta Tags -->
+    <title>CODE CRAFTERS</title>
+    <meta name="title" content="CODE CRAFTERS" />
+    <meta
+      name="description"
+      content="It is a tool designed to gather and store industrial data efficiently. It simplifies data management to support smoother industrial operations."
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://imthecode777.github.io/gokul_hackathon"
+    />
+    <meta property="og:title" content="CODE CRAFTERS" />
+    <meta
+      property="og:description"
+      content="It is a tool designed to gather and store industrial data efficiently. It simplifies data management to support smoother industrial operations."
+    />
+    <meta
+      property="og:image"
+      content="https://imthecode777.github.io/gokul_hackathon/img/link_img.jpg"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://imthecode777.github.io/gokul_hackathon"
+    />
+    <meta property="twitter:title" content="CODE CRAFTERS" />
+    <meta
+      property="twitter:description"
+      content="It is a tool designed to gather and store industrial data efficiently. It simplifies data management to support smoother industrial operations."
+    />
+    <meta
+      property="twitter:image"
+      content="https://imthecode777.github.io/gokul_hackathon/img/link_img.jpg"
+    />
+
+    <!-- Meta Tags Generated with https://metatags.io -->
+  </head>
+  <body>
     <div class="container" data-aos="fade-up" data-aos-duration="1000">
-        <h1 data-aos="zoom-in" data-aos-delay="200">Generate and Save Industrial Data</h1>
-        <form action="/submit" method="POST" enctype="multipart/form-data" class="form-container">
-            <label for="num_records">Number of Records:</label>
-            <input type="number" id="num_records" name="num_records" required data-aos="fade-left" data-aos-delay="400"><br>
+      <h1 data-aos="zoom-in" data-aos-delay="200">
+        Generate and Save Industrial Data
+      </h1>
+      <form
+        action="/submit"
+        method="POST"
+        enctype="multipart/form-data"
+        class="form-container"
+      >
+        <label for="num_records">Number of Records:</label>
+        <input
+          type="number"
+          id="num_records"
+          name="num_records"
+          required
+          data-aos="fade-left"
+          data-aos-delay="400"
+        /><br />
 
-            <label for="db_type">Database Type:</label>
-            <select id="db_type" name="db_type" required data-aos="fade-right" data-aos-delay="600">
-                <option value="sqlite">SQLite</option>
-                <option value="mysql">MySQL</option>
-                <option value="postgresql">PostgreSQL</option>
-            </select><br>
+        <label for="db_type">Database Type:</label>
+        <select
+          id="db_type"
+          name="db_type"
+          required
+          data-aos="fade-right"
+          data-aos-delay="600"
+        >
+          <option value="sqlite">SQLite</option>
+          <option value="mysql">MySQL</option>
+          <option value="postgresql">PostgreSQL</option></select
+        ><br />
 
-            <label for="db_name">Database Name:</label>
-            <input type="text" id="db_name" name="db_name" required data-aos="fade-left" data-aos-delay="800"><br>
+        <label for="db_name">Database Name:</label>
+        <input
+          type="text"
+          id="db_name"
+          name="db_name"
+          required
+          data-aos="fade-left"
+          data-aos-delay="800"
+        /><br />
 
-            <div id="extra_fields" style="display: none;">
-                <label for="user">User:</label>
-                <input type="text" id="user" name="user" data-aos="fade-right" data-aos-delay="1000"><br><br>
+        <div id="extra_fields" style="display: none">
+          <label for="user">User:</label>
+          <input
+            type="text"
+            id="user"
+            name="user"
+            data-aos="fade-right"
+            data-aos-delay="1000"
+          /><br /><br />
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" data-aos="fade-left" data-aos-delay="1200"><br><br>
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            data-aos="fade-left"
+            data-aos-delay="1200"
+          /><br /><br />
 
-                <label for="host">Host:</label>
-                <input type="text" id="host" name="host" data-aos="fade-right" data-aos-delay="1400"><br><br>
+          <label for="host">Host:</label>
+          <input
+            type="text"
+            id="host"
+            name="host"
+            data-aos="fade-right"
+            data-aos-delay="1400"
+          /><br /><br />
 
-                <label for="port">Port:</label>
-                <input type="text" id="port" name="port" data-aos="fade-left" data-aos-delay="1600"><br><br>
-            </div>
+          <label for="port">Port:</label>
+          <input
+            type="text"
+            id="port"
+            name="port"
+            data-aos="fade-left"
+            data-aos-delay="1600"
+          /><br /><br />
+        </div>
 
-            <button type="submit" class="submit-btn" data-aos="zoom-in" data-aos-delay="1700">Generate and Save Data</button>
-        </form>
+        <button
+          type="submit"
+          class="submit-btn"
+          data-aos="zoom-in"
+          data-aos-delay="1700"
+        >
+          Generate and Save Data
+        </button>
+      </form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        AOS.init();
+      AOS.init();
     </script>
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>
