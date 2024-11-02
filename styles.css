@@ -1,0 +1,152 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+.container {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    transition: transform 0.4s ease;
+    margin: 1.5rem;
+}
+
+.container:hover {
+    transform: scale(1.03);
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    font-size: 1rem;
+    text-align: left;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f4f5fc;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    font-family: Arial, sans-serif;
+}
+
+input:focus,
+select:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 10px rgba(106, 17, 203, 0.3);
+    background-color: #fff;
+}
+
+#extra_fields {
+    transition: all 0.5s ease;
+}
+
+.submit-btn {
+    padding: 0.9rem;
+    font-size: 1.2rem;
+    color: #fff;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.4s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(to right, #2575fc, #6a11cb);
+    transform: scale(1.06);
+}
+
+.submit-btn:active {
+    transform: scale(0.97);
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="password"],
+    select {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+
+    .submit-btn {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 600px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 650px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
