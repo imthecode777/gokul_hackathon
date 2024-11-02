@@ -7,9 +7,9 @@ document.getElementById('db_type').addEventListener('change', function () {
     }
 });
 
-    const isDesktop = window.innerWidth > 768; // Set the breakpoint for desktop screens
+    const isDesktop = window.innerWidth > 768;
 
     AOS.init({
-        once: isDesktop, // Trigger animations only once if on desktop
+        once: isDesktop,
         duration: 1000,
     });
