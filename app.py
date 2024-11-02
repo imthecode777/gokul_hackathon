@@ -59,6 +59,13 @@ def submit():
         password = request.form['password']
         host = request.form['host']
         port = request.form['port']
+    elif db_type == "sqlite":
+        sqlite_file = request.files['sqlite_file']
+        if sqlite_file and (sqlite_file.filename.endswith('.sqlite') or sqlite_file.filename.endswith('.db')):
+            db_name = sqlite_file.filename  # Use the uploaded file name
+            sqlite_file.save(db_name)  # Save the uploaded file
+        else:
+            return "Invalid file type. Please upload a .sqlite or .db file."
     
     df = generate_data(num_records)
     result = connect_and_save(df, db_type, db_name, user=user, password=password, host=host, port=port)
