@@ -6,7 +6,10 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    background-image: url(./img/001.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,17 +89,25 @@ select:focus {
     padding: 0.9rem;
     font-size: 1.2rem;
     color: #fff;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: radial-gradient(780px at 37.8% 100.3%, rgb(19, 55, 115) 2.2%, rgb(32, 7, 80) 20.2%, rgb(27, 88, 111) 58.6%, rgb(115, 88, 44) 75%, rgb(99, 19, 90) 89.6%, rgb(12, 51, 76) 96.1%);
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.4s ease, transform 0.3s ease;
+    transition: background 1.5s ease-in-out;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     margin-top: 1rem;
 }
 
 .submit-btn:hover {
-    background: linear-gradient(to right, #2575fc, #6a11cb);
+    background: radial-gradient(
+        780px at 37.8% 100.3%,
+        rgb(25, 70, 135) 2.2%,     /* Slightly lighter blue */
+        rgb(45, 15, 95) 20.2%,     /* Darker purple */
+        rgb(30, 100, 130) 58.6%,   /* Brighter teal */
+        rgb(145, 95, 50) 75%,      /* Warmer brown */
+        rgb(120, 30, 115) 89.6%,   /* More intense magenta */
+        rgb(20, 60, 95) 96.1%      /* Darker blue */
+    );
     transform: scale(1.06);
 }
 
