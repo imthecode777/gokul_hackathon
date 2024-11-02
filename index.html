@@ -3,203 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industrial Operations Predictor</title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* Page Styles */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-            color: #333;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            color: #005792;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 1.1em;
-            margin-top: 10px;
-        }
-
-        /* Card Container */
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px 30px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Button */
-        .btn {
-            background: #007acc;
-            color: #fff;
-            padding: 12px 24px;
-            font-size: 1em;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .btn:hover {
-            background: #005792;
-        }
-
-        /* Result Display */
-        .result {
-            font-size: 1.2em;
-            color: #444;
-            margin-top: 20px;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .result.show {
-            opacity: 1;
-        }
-    </style>
+    <title>Data Generation Form</title>
 </head>
 <body>
+    <h1>Generate and Save Industrial Data</h1>
+    <form action="/submit" method="POST">
+        <label for="num_records">Number of Records:</label>
+        <input type="number" id="num_records" name="num_records" required><br><br>
 
-    <h1>Industrial Operations Predictor</h1>
+        <label for="db_type">Database Type:</label>
+        <select id="db_type" name="db_type" required>
+            <option value="sqlite">SQLite</option>
+            <option value="mysql">MySQL</option>
+            <option value="postgresql">PostgreSQL</option>
+        </select><br><br>
 
-    <div class="card">
-        <p>Click the button to generate data, train the model, and predict productivity, cost, and profit.</p>
-        <button class="btn" onclick="runPrediction()">Run Prediction</button>
+        <label for="db_name">Database Name:</label>
+        <input type="text" id="db_name" name="db_name" required><br><br>
 
-        <div class="result" id="result"></div>
-    </div>
+        <div id="extra_fields" style="display: none;">
+            <label for="user">User:</label>
+            <input type="text" id="user" name="user"><br><br>
 
-    <script>
-        // JavaScript code for data generation and predictions
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"><br><br>
 
-        function getRandom(min, max) {
-            return Math.random() * (max - min) + min;
-        }
+            <label for="host">Host:</label>
+            <input type="text" id="host" name="host"><br><br>
 
-        const nSamples = 100;
-        const laborHours = Array.from({ length: nSamples }, () => getRandom(40, 60));
-        const machineDowntime = Array.from({ length: nSamples }, () => getRandom(0, 10));
-        const materialQuality = Array.from({ length: nSamples }, () => getRandom(0.5, 1.0));
-        const maintenanceFrequency = Array.from({ length: nSamples }, () => getRandom(0, 5));
-        const energyCosts = Array.from({ length: nSamples }, () => getRandom(10, 20));
+            <label for="port">Port:</label>
+            <input type="text" id="port" name="port"><br><br>
+        </div>
 
-        const productivity = laborHours.map((lh, i) => 
-            0.5 * lh - 0.3 * machineDowntime[i] + 0.7 * materialQuality[i] + getRandom(-1, 1)
-        );
-        const cost = laborHours.map((lh, i) => 
-            1.2 * lh + 0.5 * energyCosts[i] + 0.3 * maintenanceFrequency[i] + 0.8 * machineDowntime[i] + getRandom(-1, 1)
-        );
-        const profit = productivity.map((prod, i) => 
-            2 * prod - 1.5 * cost[i] + getRandom(-1, 1)
-        );
+        <button type="submit">Generate and Save Data</button>
+    </form>
 
-        const data = laborHours.map((_, i) => ({
-            'Labor Hours': laborHours[i],
-            'Machine Downtime': machineDowntime[i],
-            'Material Quality': materialQuality[i],
-            'Maintenance Frequency': maintenanceFrequency[i],
-            'Energy Costs': energyCosts[i],
-            'Productivity': productivity[i],
-            'Cost': cost[i],
-            'Profit': profit[i]
-        }));
-
-        function trainTestSplit(data, testSize = 0.2) {
-            const testCount = Math.floor(data.length * testSize);
-            const shuffledData = [...data].sort(() => 0.5 - Math.random());
-            return {
-                train: shuffledData.slice(0, data.length - testCount),
-                test: shuffledData.slice(data.length - testCount)
-            };
-        }
-
-        function meanSquaredError(yTrue, yPred) {
-            return yTrue.reduce((sum, trueVal, i) => sum + Math.pow(trueVal - yPred[i], 2), 0) / yTrue.length;
-        }
-
-        function linearRegression(trainData, features, target) {
-            const coef = Array(features.length).fill(0);
-            const intercept = trainData.reduce((sum, row) => sum + row[target], 0) / trainData.length;
-            return { coef, intercept };
-        }
-
-        function predict(model, X) {
-            return X.map(row => 
-                row.reduce((sum, val, i) => sum + val * model.coef[i], model.intercept)
-            );
-        }
-
-        function runPrediction() {
-            // Model for Productivity
-            const splitProductivity = trainTestSplit(data);
-            const modelProductivity = linearRegression(splitProductivity.train, 
-                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'], 
-                'Productivity');
-            const XTestProductivity = splitProductivity.test.map(row => 
-                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'].map(feature => row[feature])
-            );
-            const yTestProductivity = splitProductivity.test.map(row => row['Productivity']);
-            const productivityPred = predict(modelProductivity, XTestProductivity);
-            const productivityMSE = meanSquaredError(yTestProductivity, productivityPred);
-
-            // Model for Cost
-            const splitCost = trainTestSplit(data);
-            const modelCost = linearRegression(splitCost.train, 
-                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'], 
-                'Cost');
-            const XTestCost = splitCost.test.map(row => 
-                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'].map(feature => row[feature])
-            );
-            const yTestCost = splitCost.test.map(row => row['Cost']);
-            const costPred = predict(modelCost, XTestCost);
-            const costMSE = meanSquaredError(yTestCost, costPred);
-
-            // Model for Profit
-            const splitProfit = trainTestSplit(data);
-            const modelProfit = linearRegression(splitProfit.train, ['Productivity', 'Cost'], 'Profit');
-            const XTestProfit = splitProfit.test.map(row => 
-                ['Productivity', 'Cost'].map(feature => row[feature])
-            );
-            const yTestProfit = splitProfit.test.map(row => row['Profit']);
-            const profitPred = predict(modelProfit, XTestProfit);
-            const profitMSE = meanSquaredError(yTestProfit, profitPred);
-
-            // Display results with fade-in effect
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `
-                <p>Productivity MSE: ${productivityMSE.toFixed(2)}</p>
-                <p>Cost MSE: ${costMSE.toFixed(2)}</p>
-                <p>Profit MSE: ${profitMSE.toFixed(2)}</p>
-            `;
-            resultDiv.classList.add('show');
-        }
-    </script>
-
+    <script src="./script.js"></script>
 </body>
 </html>
