@@ -3,98 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Responsive Webpage</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>Industrial Operations Predictor</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Page Styles */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #005792;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        /* Card Container */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button */
+        .btn {
+            background: #007acc;
+            color: #fff;
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: #005792;
+        }
+
+        /* Result Display */
+        .result {
+            font-size: 1.2em;
+            color: #444;
+            margin-top: 20px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .result.show {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header with Navbar -->
-    <header class="header">
-        <div class="logo">YourBrand</div>
-        <nav class="nav">
-            <a href="#about">About</a>
-            <a href="#features">Features</a>
-            <a href="#contact">Contact</a>
-            <button class="nav-btn">Sign Up</button>
-        </nav>
-        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
-    </header>
-    
-    <!-- Mobile Menu -->
-    <nav class="mobile-nav" id="mobile-nav">
-        <a href="#about" onclick="toggleMenu()">About</a>
-        <a href="#features" onclick="toggleMenu()">Features</a>
-        <a href="#contact" onclick="toggleMenu()">Contact</a>
-        <button class="nav-btn" onclick="toggleMenu()">Sign Up</button>
-    </nav>
+    <h1>Industrial Operations Predictor</h1>
 
-    <!-- Hero Section -->
-    <section class="hero" data-aos="fade-up">
-        <div class="hero-content">
-            <h1>Innovate and Grow with Us</h1>
-            <p>Solutions designed to take your business to the next level.</p>
-            <button class="cta-btn">Explore Features</button>
-        </div>
-    </section>
+    <div class="card">
+        <p>Click the button to generate data, train the model, and predict productivity, cost, and profit.</p>
+        <button class="btn" onclick="runPrediction()">Run Prediction</button>
 
-    <!-- About Section -->
-    <section id="about" class="about" data-aos="fade-right">
-        <h2>About Our Company</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget lorem at felis viverra hendrerit.</p>
-        <img src="https://source.unsplash.com/random/800x400" alt="About Us Image">
-    </section>
+        <div class="result" id="result"></div>
+    </div>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="feature" data-aos="zoom-in">
-            <img src="https://source.unsplash.com/random/300x300" alt="Feature One">
-            <h3>Scalable Solutions</h3>
-            <p>Designed to adapt and grow with your business needs.</p>
-        </div>
-        <div class="feature" data-aos="zoom-in">
-            <img src="https://source.unsplash.com/random/301x301" alt="Feature Two">
-            <h3>Seamless Integration</h3>
-            <p>Effortless connectivity across all your tools and platforms.</p>
-        </div>
-        <div class="feature" data-aos="zoom-in">
-            <img src="https://source.unsplash.com/random/302x302" alt="Feature Three">
-            <h3>Robust Security</h3>
-            <p>Keep your data safe with industry-leading security measures.</p>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact" data-aos="fade-left">
-        <h2>Connect with Us</h2>
-        <p>We’d love to help you achieve your goals. Reach out today!</p>
-        <form class="contact-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" rows="4" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 YourBrand. All rights reserved.</p>
-    </footer>
-
-    <!-- AOS Library Script -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            easing: 'ease-in-out',
-            once: true
-        });
+        // JavaScript code for data generation and predictions
 
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
 
-        function toggleMenu() {
-        const mobileNav = document.getElementById("mobile-nav");
-        mobileNav.classList.toggle("active");
-    }
+        const nSamples = 100;
+        const laborHours = Array.from({ length: nSamples }, () => getRandom(40, 60));
+        const machineDowntime = Array.from({ length: nSamples }, () => getRandom(0, 10));
+        const materialQuality = Array.from({ length: nSamples }, () => getRandom(0.5, 1.0));
+        const maintenanceFrequency = Array.from({ length: nSamples }, () => getRandom(0, 5));
+        const energyCosts = Array.from({ length: nSamples }, () => getRandom(10, 20));
+
+        const productivity = laborHours.map((lh, i) => 
+            0.5 * lh - 0.3 * machineDowntime[i] + 0.7 * materialQuality[i] + getRandom(-1, 1)
+        );
+        const cost = laborHours.map((lh, i) => 
+            1.2 * lh + 0.5 * energyCosts[i] + 0.3 * maintenanceFrequency[i] + 0.8 * machineDowntime[i] + getRandom(-1, 1)
+        );
+        const profit = productivity.map((prod, i) => 
+            2 * prod - 1.5 * cost[i] + getRandom(-1, 1)
+        );
+
+        const data = laborHours.map((_, i) => ({
+            'Labor Hours': laborHours[i],
+            'Machine Downtime': machineDowntime[i],
+            'Material Quality': materialQuality[i],
+            'Maintenance Frequency': maintenanceFrequency[i],
+            'Energy Costs': energyCosts[i],
+            'Productivity': productivity[i],
+            'Cost': cost[i],
+            'Profit': profit[i]
+        }));
+
+        function trainTestSplit(data, testSize = 0.2) {
+            const testCount = Math.floor(data.length * testSize);
+            const shuffledData = [...data].sort(() => 0.5 - Math.random());
+            return {
+                train: shuffledData.slice(0, data.length - testCount),
+                test: shuffledData.slice(data.length - testCount)
+            };
+        }
+
+        function meanSquaredError(yTrue, yPred) {
+            return yTrue.reduce((sum, trueVal, i) => sum + Math.pow(trueVal - yPred[i], 2), 0) / yTrue.length;
+        }
+
+        function linearRegression(trainData, features, target) {
+            const coef = Array(features.length).fill(0);
+            const intercept = trainData.reduce((sum, row) => sum + row[target], 0) / trainData.length;
+            return { coef, intercept };
+        }
+
+        function predict(model, X) {
+            return X.map(row => 
+                row.reduce((sum, val, i) => sum + val * model.coef[i], model.intercept)
+            );
+        }
+
+        function runPrediction() {
+            // Model for Productivity
+            const splitProductivity = trainTestSplit(data);
+            const modelProductivity = linearRegression(splitProductivity.train, 
+                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'], 
+                'Productivity');
+            const XTestProductivity = splitProductivity.test.map(row => 
+                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'].map(feature => row[feature])
+            );
+            const yTestProductivity = splitProductivity.test.map(row => row['Productivity']);
+            const productivityPred = predict(modelProductivity, XTestProductivity);
+            const productivityMSE = meanSquaredError(yTestProductivity, productivityPred);
+
+            // Model for Cost
+            const splitCost = trainTestSplit(data);
+            const modelCost = linearRegression(splitCost.train, 
+                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'], 
+                'Cost');
+            const XTestCost = splitCost.test.map(row => 
+                ['Labor Hours', 'Machine Downtime', 'Material Quality', 'Maintenance Frequency', 'Energy Costs'].map(feature => row[feature])
+            );
+            const yTestCost = splitCost.test.map(row => row['Cost']);
+            const costPred = predict(modelCost, XTestCost);
+            const costMSE = meanSquaredError(yTestCost, costPred);
+
+            // Model for Profit
+            const splitProfit = trainTestSplit(data);
+            const modelProfit = linearRegression(splitProfit.train, ['Productivity', 'Cost'], 'Profit');
+            const XTestProfit = splitProfit.test.map(row => 
+                ['Productivity', 'Cost'].map(feature => row[feature])
+            );
+            const yTestProfit = splitProfit.test.map(row => row['Profit']);
+            const profitPred = predict(modelProfit, XTestProfit);
+            const profitMSE = meanSquaredError(yTestProfit, profitPred);
+
+            // Display results with fade-in effect
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p>Productivity MSE: ${productivityMSE.toFixed(2)}</p>
+                <p>Cost MSE: ${costMSE.toFixed(2)}</p>
+                <p>Profit MSE: ${profitMSE.toFixed(2)}</p>
+            `;
+            resultDiv.classList.add('show');
+        }
     </script>
+
 </body>
 </html>
