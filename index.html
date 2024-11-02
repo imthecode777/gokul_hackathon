@@ -10,42 +10,36 @@
 <body>
     <div class="container" data-aos="fade-up" data-aos-duration="1000">
         <h1 data-aos="zoom-in" data-aos-delay="200">Generate and Save Industrial Data</h1>
-        <form action="/submit" method="POST" class="form-container" enctype="multipart/form-data">
+        <form action="/submit" method="POST" enctype="multipart/form-data" class="form-container">
             <label for="num_records">Number of Records:</label>
             <input type="number" id="num_records" name="num_records" required data-aos="fade-left" data-aos-delay="400"><br>
-        
+
             <label for="db_type">Database Type:</label>
             <select id="db_type" name="db_type" required data-aos="fade-right" data-aos-delay="600">
                 <option value="sqlite">SQLite</option>
                 <option value="mysql">MySQL</option>
                 <option value="postgresql">PostgreSQL</option>
             </select><br>
-        
+
             <label for="db_name">Database Name:</label>
             <input type="text" id="db_name" name="db_name" required data-aos="fade-left" data-aos-delay="800"><br>
-        
+
             <div id="extra_fields" style="display: none;">
                 <label for="user">User:</label>
                 <input type="text" id="user" name="user" data-aos="fade-right" data-aos-delay="1000"><br><br>
-        
+
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" data-aos="fade-left" data-aos-delay="1200"><br><br>
-        
+
                 <label for="host">Host:</label>
                 <input type="text" id="host" name="host" data-aos="fade-right" data-aos-delay="1400"><br><br>
-        
+
                 <label for="port">Port:</label>
                 <input type="text" id="port" name="port" data-aos="fade-left" data-aos-delay="1600"><br><br>
-        
-                <div class="button-container" data-aos="fade-up" data-aos-delay="1800">
-                    <label for="sqlite_file" class="custom-file-upload-label">Choose SQLite File</label>
-                    <input type="file" id="sqlite_file" name="sqlite_file" class="custom-file-upload" required>
-                </div>
             </div>
-        
-            <button type="submit" class="submit-btn" data-aos="zoom-in" data-aos-delay="2000">Generate and Save Data</button>
+
+            <button type="submit" class="submit-btn" data-aos="zoom-in" data-aos-delay="1800">Generate and Save Data</button>
         </form>
-        
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

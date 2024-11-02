@@ -104,63 +104,6 @@ select:focus {
     transform: scale(0.97);
 }
 
-/* Hide the default file input */
-input[type="file"] {
-    display: none; /* Hide the default file input */
-}
-
-/* Style the custom file input button */
-.custom-file-upload {
-    display: inline-block;
-    padding: 0.4rem 0.8rem; /* Smaller padding for a smaller button */
-    font-size: 0.8rem; /* Smaller font size */
-    color: #fff;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    border: none;
-    border-radius: 20px; /* Rounded corners */
-    cursor: pointer;
-    transition: background 0.4s ease, transform 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    margin-top: 1rem; /* Space above the button */
-    width: auto; /* Width set to auto for a smaller size */
-}
-
-/* Hover effect */
-.custom-file-upload:hover {
-    background: linear-gradient(to right, #2575fc, #6a11cb);
-    transform: scale(1.06);
-}
-
-/* Active state effect */
-.custom-file-upload:active {
-    transform: scale(0.97);
-}
-
-/* Label for custom file input */
-.custom-file-upload-label {
-    display: inline-block;
-    padding: 0.4rem 0.8rem; /* Smaller padding for a smaller label */
-    font-size: 0.8rem; /* Smaller font size */
-    color: #fff;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    border-radius: 20px; /* Rounded corners */
-    cursor: pointer;
-    text-align: center;
-}
-
-/* Focus effect on the label */
-.custom-file-upload-label:focus {
-    outline: 2px solid #6a11cb; /* Outline for accessibility */
-}
-
-/* Align the button to the left */
-.button-container {
-    display: flex;
-    justify-content: flex-start; /* Align to the left */
-    margin-top: 1rem; /* Space above the button */
-}
-
-
 @media (max-width: 600px) {
     h1 {
         font-size: 1.6rem;
