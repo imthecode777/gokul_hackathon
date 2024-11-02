@@ -6,3 +6,10 @@ document.getElementById('db_type').addEventListener('change', function () {
         extraFields.style.display = 'block';
     }
 });
+
+    const isDesktop = window.innerWidth > 768; // Set the breakpoint for desktop screens
+
+    AOS.init({
+        once: isDesktop, // Trigger animations only once if on desktop
+        duration: 1000,
+    });
