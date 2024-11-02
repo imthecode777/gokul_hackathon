@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Responsive Webpage</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+
+    <!-- Header with Navbar -->
+    <header class="header">
+        <div class="logo">YourBrand</div>
+        <nav class="nav">
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+            <button class="nav-btn">Sign Up</button>
+        </nav>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="#about" onclick="toggleMenu()">About</a>
+        <a href="#features" onclick="toggleMenu()">Features</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
+        <button class="nav-btn" onclick="toggleMenu()">Sign Up</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" data-aos="fade-up">
+        <div class="hero-content">
+            <h1>Innovate and Grow with Us</h1>
+            <p>Solutions designed to take your business to the next level.</p>
+            <button class="cta-btn">Explore Features</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about" data-aos="fade-right">
+        <h2>About Our Company</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget lorem at felis viverra hendrerit.</p>
+        <img src="https://source.unsplash.com/random/800x400" alt="About Us Image">
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="feature" data-aos="zoom-in">
+            <img src="https://source.unsplash.com/random/300x300" alt="Feature One">
+            <h3>Scalable Solutions</h3>
+            <p>Designed to adapt and grow with your business needs.</p>
+        </div>
+        <div class="feature" data-aos="zoom-in">
+            <img src="https://source.unsplash.com/random/301x301" alt="Feature Two">
+            <h3>Seamless Integration</h3>
+            <p>Effortless connectivity across all your tools and platforms.</p>
+        </div>
+        <div class="feature" data-aos="zoom-in">
+            <img src="https://source.unsplash.com/random/302x302" alt="Feature Three">
+            <h3>Robust Security</h3>
+            <p>Keep your data safe with industry-leading security measures.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact" data-aos="fade-left">
+        <h2>Connect with Us</h2>
+        <p>We’d love to help you achieve your goals. Reach out today!</p>
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 YourBrand. All rights reserved.</p>
+    </footer>
+
+    <!-- AOS Library Script -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+
+        function toggleMenu() {
+        const mobileNav = document.getElementById("mobile-nav");
+        mobileNav.classList.toggle("active");
+    }
+    </script>
+</body>
+</html>
